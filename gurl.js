@@ -46,7 +46,7 @@ function getLink() {
             var sUrl = c["short_url"];
             // Create link if so
             msgContents = $("<a>").attr("href",sUrl).text(sUrl);
-s        } else {
+        } else {
             // Otherwise display error message
             msgContents = "Error in conversion.";
         }
