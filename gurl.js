@@ -95,7 +95,6 @@ function getUrlShorteningRequestParams (b) {
         for (var m = 0, o = 0; o < l.length; o++) m = c(l.charCodeAt(o), m << 6, m << 16, -m);
         return m
     }
-    var g = "auth_token";
     var h = {
         byteArray_: stringToArray(b),
         charCodeAt: function (l) {
