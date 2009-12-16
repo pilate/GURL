@@ -5,6 +5,7 @@ $(document).ready(function() {
             getLink();
             return false;
         });
+    // Catch the enter key
     $("#inLink").live("keypress",
         function(e) {
             if (e.keyCode == 13) {
@@ -12,12 +13,14 @@ $(document).ready(function() {
                 return false;
             }
         });
+    // Select textbox on load
     $("#inLink").select();
 });
+
 // Convert string to byte array
 function stringToArray(b) {
     var charArray = new Array();
-    // Loop over string
+    // Iterate over string
     for (var i=0; i<b.length; i++) {
         var thisChar = b[i];
         // Add character code to array
@@ -25,35 +28,36 @@ function stringToArray(b) {
     }
     return charArray;
 }
+
 // Get link from goo.gl.php
 function getLink() {
     // Hide inputs until .get returns
-    $("#inLink").attr("disabled","disabled");
-    $("#clickButton").attr("disabled","disabled");
+    $("#inLink,#clickButton").attr("disabled","disabled");
     // Get URL from input
     var textLink = document.getElementById("inLink").value;
     // Construct link for php
     var getLink = "goo.gl.php?url=" + encodeURIComponent(textLink) + "&auth=" + getUrlShorteningRequestParams(textLink);
     // Get link
     jQuery.get(getLink, function(data){
+        var msgContents;
         var c = eval("(" + data + ")");
         // Check for short URL being returned
         if ("short_url" in c) {
+            var sUrl = c["short_url"];
             // Create link if so
-            var newLink = $("<a>").attr("href",c["short_url"]).text(c["short_url"]);
-            // Insert into message box
-            $("#urlSpan").html(newLink);
-        } else {
-            // Display error message
-            $("#urlSpan").html("Error in conversion.");
+            msgContents = $("<a>").attr("href",sUrl).text(sUrl);
+s        } else {
+            // Otherwise display error message
+            msgContents = "Error in conversion.";
         }
+        // Set message box text
+        $("#urlSpan").html(msgContents);
         // Enable form elements
-        $("#inLink").attr("disabled","");
-        $("#clickButton").attr("disabled","");
+        $("#inLink,#clickButton").removeAttr("disabled");
     });
 }
 
-// Shamelessly copied from toolbar.js in the Google Toolbar package
+// Copied from toolbar.js in the Google Toolbar package
 //
 // Creates auth_token for POST
 
