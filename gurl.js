@@ -40,7 +40,7 @@ function getLink() {
         // Check for short URL being returned
         if ("short_url" in c) {
             // Create link if so
-            newLink = $("<a>").attr("href",c["short_url"]).text(c["short_url"]);
+            var newLink = $("<a>").attr("href",c["short_url"]).text(c["short_url"]);
             // Insert into message box
             $("#urlSpan").html(newLink);
         } else {
@@ -53,7 +53,10 @@ function getLink() {
     });
 }
 
-// Shamelessly removed from toolbar.js in the Google Toolbar package
+// Shamelessly copied from toolbar.js in the Google Toolbar package
+//
+// Creates auth_token for POST
+
 function getUrlShorteningRequestParams (b) {
     function c() {
         for (var l = 0, m = 0; m < arguments.length; m++) l = l + arguments[m] & 4294967295;
