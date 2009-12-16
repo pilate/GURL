@@ -1,7 +1,9 @@
 $(document).ready(function() {
+    // Set up form submit handlers
     $("#clickButton").live("click",
         function () {
             getLink();
+            return false;
         });
     $("#inLink").live("keypress",
         function(e) {
@@ -12,29 +14,40 @@ $(document).ready(function() {
         });
     $("#inLink").select();
 });
-
+// Convert string to byte array
 function stringToArray(b) {
     var charArray = new Array();
+    // Loop over string
     for (var i=0; i<b.length; i++) {
         var thisChar = b[i];
+        // Add character code to array
         charArray.push(thisChar.charCodeAt(0));
     }
     return charArray;
 }
-
+// Get link from goo.gl.php
 function getLink() {
+    // Hide inputs until .get returns
     $("#inLink").attr("disabled","disabled");
     $("#clickButton").attr("disabled","disabled");
+    // Get URL from input
     var textLink = document.getElementById("inLink").value;
+    // Construct link for php
     var getLink = "goo.gl.php?url=" + encodeURIComponent(textLink) + "&auth=" + getUrlShorteningRequestParams(textLink);
-    var thisJSON = jQuery.get(getLink, function(data){
+    // Get link
+    jQuery.get(getLink, function(data){
         var c = eval("(" + data + ")");
+        // Check for short URL being returned
         if ("short_url" in c) {
+            // Create link if so
             newLink = $("<a>").attr("href",c["short_url"]).text(c["short_url"]);
+            // Insert into message box
             $("#urlSpan").html(newLink);
         } else {
+            // Display error message
             $("#urlSpan").html("Error in conversion.");
         }
+        // Enable form elements
         $("#inLink").attr("disabled","");
         $("#clickButton").attr("disabled","");
     });
