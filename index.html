@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Google link creator</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style type="text/css">
+            .mDiv {
+                width:300px;
+                margin:auto;
+                text-align:center;
+            }
+            #inLink {
+                width:300px;
+                margin-bottom:10px;
+            }
+            #urlSpan {
+                font-size:25px;
+            }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script type="text/javascript" src="gurl.js"></script>
+    </head>
+    <body>
+        <div class="mDiv">
+            <h2>Goo.gl Link Creator</h2>
+            <p>Enter a URL to have shortened by Goo.gl.</p>
+            <form action="">
+                <p>
+                    <input type="text" id="inLink" name="inLink">
+                    <input type="button" id="clickButton" value="Shorten">
+                </p>
+            </form>
+        </div>
+        <div style="width:300px;height:100px;margin:auto;text-align:center;padding:20px 0px;"><span id="urlSpan"></span></div>
+    </body>
+</html>
